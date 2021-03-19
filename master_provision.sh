@@ -1,9 +1,9 @@
 # update sources
 sudo apt update -y
 echo "installation of the necessary software..."
-sudo yum install -y nano
-sudo yum install -y htop
-sudo yum install -y wget
+sudo apt install -y nano
+sudo apt install -y htop
+sudo apt install -y wget
 ### УСТАНОВКА и НАСТРОЙКА Filebeat
 echo "Downloading and installing Filebeat..."
 sudo wget -q https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.3.2-x86_64.rpm
