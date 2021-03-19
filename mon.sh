@@ -16,7 +16,6 @@ sudo cp filebeat.yml /etc/filebeat/
 echo "Staring Filebeat..."
 sudo systemctl enable filebeat
 sudo systemctl start filebeat
-sudo systemctl status filebeat
 
 ### УСТАНОВКА и НАСТРОЙКА GRAFANA
 
@@ -27,7 +26,6 @@ sudo yum install ./grafana-7.4.2-1.x86_64.rpm -y
 echo "Starting grafana-server..."
 sudo systemctl daemon-reload
 sudo systemctl start grafana-server
-sudo systemctl status grafana-server
 
 ### УСТАНОВКА и НАСТРОЙКА ПРОМЕТЕЯ
 # скачиваем прометей
@@ -70,7 +68,6 @@ sudo cp /home/vagrant/prometheus.service /etc/systemd/system/prometheus.service
 echo "Staring prometheus.service..."
 sudo systemctl daemon-reload
 sudo systemctl start prometheus.service
-sudo systemctl status prometheus.service
 
 
 ### УСТАНОВКА и НАСТРОЙКА NODE_EXPORTER
@@ -101,7 +98,6 @@ sudo cp node_exporter.service /etc/systemd/system/node_exporter.service
 echo "Starting node_exporter.service..."
 sudo systemctl daemon-reload
 sudo systemctl start node_exporter.service
-sudo systemctl status node_exporter.service
 
 # ДОБАВЛЕНИЕ СЕРВИСОВ В АВТОЗАГРУЗКУ
 
@@ -109,5 +105,12 @@ echo "Enabling services..."
 sudo systemctl enable prometheus.service
 sudo systemctl enable node_exporter.service
 sudo systemctl enable grafana-server
+
+echo "FINAL CHECK..."
+sudo systemctl status filebeat
+sudo systemctl status node_exporter.service
+sudo systemctl status prometheus.service
+sudo systemctl status grafana-server
+
 
 echo "Добавьте дашборды, например № 11074 и 1860 "

@@ -15,6 +15,8 @@ sudo yum install -y wget
   sudo sed -i "s/123/back2/g" "/var/www/html/index.html"
 # enable and start apache
 sudo systemctl enable httpd && sudo systemctl start httpd
+
+#Установка и настройка node_exporter
 echo "downloading node_exporter..."
 wget -q https://github.com/prometheus/node_exporter/releases/download/v1.1.1/node_exporter-1.1.1.linux-amd64.tar.gz
 echo "Creaing user node_exporter"
@@ -31,9 +33,9 @@ sudo cp node_exporter.service /etc/systemd/system/node_exporter.service
 echo "Starting node_exporter.service..."
 sudo systemctl daemon-reload
 sudo systemctl start node_exporter.service
-sudo systemctl status node_exporter.service
 echo "Enabling node_exporter.services"
 sudo systemctl enable node_exporter.service
+
 ### УСТАНОВКА и НАСТРОЙКА Filebeat
 echo "Downloading and installing Filebeat..."
 sudo wget -q https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.3.2-x86_64.rpm
@@ -45,4 +47,7 @@ sudo cp filebeat.yml /etc/filebeat/
 echo "Staring Filebeat..."
 sudo systemctl enable filebeat
 sudo systemctl start filebeat
+echo "FINAL CHECK..."
 sudo systemctl status filebeat
+sudo systemctl status node_exporter.service
+sudo systemctl status httpd

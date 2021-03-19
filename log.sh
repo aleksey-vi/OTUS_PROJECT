@@ -22,7 +22,6 @@ sudo rpm -ivh elasticsearch-*
 echo "Staring elasticsearch.service..."
 sudo systemctl enable elasticsearch
 sudo systemctl start elasticsearch
-sudo systemctl status elasticsearch
 
 ### УСТАНОВКА и НАСТРОЙКА Kibana
 
@@ -38,7 +37,6 @@ sudo cp kibana.yml /etc/kibana/
 echo "Staring kibana..."
 sudo systemctl enable kibana
 sudo systemctl start kibana
-sudo systemctl status kibana
 
 
 ### УСТАНОВКА и НАСТРОЙКА logstash
@@ -58,7 +56,6 @@ sudo cp output.conf /etc/logstash/conf.d/
 echo "Staring logstash..."
 sudo systemctl enable logstash
 sudo systemctl start logstash
-sudo systemctl status logstash
 
 ### УСТАНОВКА и НАСТРОЙКА Filebeat
 
@@ -72,4 +69,30 @@ sudo cp filebeat.yml /etc/filebeat/
 echo "Staring Filebeat..."
 sudo systemctl enable filebeat
 sudo systemctl start filebeat
+
+#Установка и настройка node_exporter
+echo "downloading node_exporter..."
+wget -q https://github.com/prometheus/node_exporter/releases/download/v1.1.1/node_exporter-1.1.1.linux-amd64.tar.gz
+echo "Creaing user node_exporter"
+sudo useradd --no-create-home --shell /bin/false node_exporter
+echo "Extracting node_exporter-1.1.1.linux-amd64.tar.gz..."
+sudo tar xfz node_exporter-*.t*.gz
+echo "Copying node_exporter to /usr/local/bin..."
+sudo cp node_exporter-1.1.1.linux-amd64/node_exporter /usr/local/bin/
+echo "Changing owner of the /usr/local/bin/node_exporter"
+sudo chown -v node_exporter /usr/local/bin/node_exporter
+echo "Copying node_exporter.service"
+wget https://raw.githubusercontent.com/aleksey-vi/OTUS_PROJECT/main/node_exporter.service
+sudo cp node_exporter.service /etc/systemd/system/node_exporter.service
+echo "Starting node_exporter.service..."
+sudo systemctl daemon-reload
+sudo systemctl start node_exporter.service
+echo "Enabling node_exporter.services"
+sudo systemctl enable node_exporter.service
+
+echo "FINAL CHECK..."
 sudo systemctl status filebeat
+sudo systemctl status node_exporter.service
+sudo systemctl status logstash
+sudo systemctl status kibana
+sudo systemctl status elasticsearch
