@@ -4,8 +4,21 @@ sudo yum install -y nano
 sudo yum install -y htop
 sudo yum install -y wget
 
-### УСТАНОВКА и НАСТРОЙКА GRAFANA
+### УСТАНОВКА и НАСТРОЙКА Filebeat
 
+echo "Downloading and installing Filebeat..."
+sudo wget -q https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.3.2-x86_64.rpm
+rpm -ivh filebeat-*
+# скачиваем конфиг файл Filebeat
+sudo wget -q https://raw.githubusercontent.com/aleksey-vi/OTUS_PROJECT/main/filebeat.yml
+# копируем в директорию
+sudo cp filebeat.yml /etc/filebeat/
+echo "Staring Filebeat..."
+sudo systemctl enable filebeat
+sudo systemctl start filebeat
+sudo systemctl status filebeat
+
+### УСТАНОВКА и НАСТРОЙКА GRAFANA
 
 echo "Downloadind and installing grafana..."
 wget -q https://dl.grafana.com/oss/release/grafana-7.4.2-1.x86_64.rpm
@@ -17,8 +30,6 @@ sudo systemctl start grafana-server
 sudo systemctl status grafana-server
 
 ### УСТАНОВКА и НАСТРОЙКА ПРОМЕТЕЯ
-
-
 # скачиваем прометей
 echo "Downloading prometheus..."
 wget -q https://github.com/prometheus/prometheus/releases/download/v2.25.0/prometheus-2.25.0.linux-amd64.tar.gz
@@ -63,7 +74,6 @@ sudo systemctl status prometheus.service
 
 
 ### УСТАНОВКА и НАСТРОЙКА NODE_EXPORTER
-
 
 # скачиваем node_exporter
 # источник: https://prometheus.io/download/
