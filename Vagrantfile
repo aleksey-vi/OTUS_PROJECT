@@ -87,7 +87,7 @@ Vagrant.configure("2") do |config|
       log.vm.hostname = "log"
       log.vm.box = "centos/7"
       log.vm.box_version = "2004.01"
-      log.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
+      log.vm.network "forwarded_port", guest: 80, host: 8083, host_ip: "127.0.0.1"
       log.vm.network "private_network", ip: "192.168.11.106"
       log.vm.provider "virtualbox" do |vb|
         vb.memory = "4096"

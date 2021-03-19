@@ -32,6 +32,6 @@ scrape_configs:
     static_configs:
     - targets: ['localhost:9100']
   - job_name: 'node_exporter_clients'
-      scrape_interval: 5s
-      static_configs:
-      - targets: ['192.168.11.100:9100','192.168.11.101:9100','192.168.11.102:9100']
+    scrape_interval: 5s
+    static_configs:
+    - targets: ['192.168.11.100:9100','192.168.11.101:9100','192.168.11.102:9100','192.168.11.103:9100','192.168.11.104:9100','192.168.11.105:9100','192.168.11.106:9100']

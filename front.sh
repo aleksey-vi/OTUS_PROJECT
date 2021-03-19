@@ -39,3 +39,15 @@ sudo systemctl start node_exporter.service
 sudo systemctl status node_exporter.service
 echo "Enabling node_exporter.services"
 sudo systemctl enable node_exporter.service
+### УСТАНОВКА и НАСТРОЙКА Filebeat
+echo "Downloading and installing Filebeat..."
+sudo wget -q https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.3.2-x86_64.rpm
+rpm -ivh filebeat-*
+# скачиваем конфиг файл Filebeat
+sudo wget -q https://raw.githubusercontent.com/aleksey-vi/OTUS_PROJECT/main/filebeat.yml
+# копируем в директорию
+sudo cp filebeat.yml /etc/filebeat/
+echo "Staring Filebeat..."
+sudo systemctl enable filebeat
+sudo systemctl start filebeat
+sudo systemctl status filebeat
