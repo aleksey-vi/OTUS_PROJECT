@@ -6,7 +6,7 @@
 #      else
       echo "Для запуска ПРОЕКТА у Вас должны быть установлены:VirtualBox и Vagrant.
 Осуществляется проверка наличия необходимого ПО..."
-
+sudo apt install -y git curl
 #$1 = vagrant - поданая на вход скрипта переменная
       I=`dpkg -s vagrant | grep "Status" ` #проверяем состояние пакета (dpkg) и ищем в выводе его статус (grep)
       if [ -n "$I" ]; then echo "vagrant installed"
