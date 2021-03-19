@@ -6,8 +6,8 @@ sudo apt install -y htop
 sudo apt install -y wget
 ### УСТАНОВКА и НАСТРОЙКА Filebeat
 echo "Downloading and installing Filebeat..."
-sudo wget -q https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.3.2-x86_64.rpm
-rpm -ivh filebeat-*
+sudo wget -q https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.4.0-amd64.deb
+dpkg -i filebeat-*
 # скачиваем конфиг файл Filebeat
 sudo wget -q https://raw.githubusercontent.com/aleksey-vi/OTUS_PROJECT/main/filebeat.yml
 # копируем в директорию
